@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class FindLargestElement {
     public static int findLargest(int[] arr) {
-        int largest = arr[0];
+        int largest = 0;
 
         for (int i : arr) {
             if (i > largest) {
