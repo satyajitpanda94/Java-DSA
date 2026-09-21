@@ -15,7 +15,8 @@ public class FindSecondLargest {
         // .boxed()
         // .mapToObj(value->Integer.valueOf(value))
         .mapToObj(Integer::valueOf)
-        .sorted((a,b)->b-a)
+        // .sorted((a,b)->b-a)
+        .sorted(Comparator.reverseOrder())
         .skip(1)
         .findFirst()
         .orElse(0);
