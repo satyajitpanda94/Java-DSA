@@ -1,18 +1,17 @@
 public class FindMissingNumber {
     public static void main(String[] args) {
-        int[] input = { 1, 2, 3, 4, 5 };
+        int[] input = { 2, 3, 4, 5, 6 };
         System.out.println(findMissingNumber(input, 6));
     }
 
     private static int findMissingNumber(int[] input, int n) {
-        int j = 1;
-        for (int i = 0; i < input.length; i++) {
-            if (input[i] != j) {
-                return j;
+        for (int i = input.length - 1; i >= 0; i--) {
+            if (input[i] != n) {
+                return n;
             }
-            j++;
+            n--;
         }
 
-        return j;
+        return n;
     }
 }
