@@ -5,10 +5,20 @@ public class RemoveDuplicatesFromSorted {
         int[] sortedArr = { 12, 25, 25, 36, 48, 48, 48, 57, 57, 91 };
 
         System.out.println(Arrays.toString(removeDuplicates(sortedArr)));
+
+        int[] sortedArr2 = { 13, 13, 24, 33, 36, 48, 48, 49, 57, 91 };
+
+        System.out.println(Arrays.toString(removeDuplicatesByStream(sortedArr2)));
+    }
+
+    private static int[] removeDuplicatesByStream(int[] sortedArr) {
+        return Arrays.stream(sortedArr)
+                .distinct()
+                .toArray();
     }
 
     private static int[] removeDuplicates(int[] sortedArr) {
-        int[] res = new int[sortedArr.length - 1];
+        int[] res = new int[sortedArr.length];
 
         int temp = sortedArr[0];
         int j = 0;
@@ -19,6 +29,6 @@ public class RemoveDuplicatesFromSorted {
                 res[++j] = temp;
             }
         }
-        return res;
+        return Arrays.copyOf(res, j + 1);
     }
 }
