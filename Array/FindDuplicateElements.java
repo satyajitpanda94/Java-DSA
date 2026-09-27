@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 
 public class FindDuplicateElements {
     public static void main(String[] args) {
@@ -6,22 +7,34 @@ public class FindDuplicateElements {
         System.out.println(Arrays.toString(findDuplicates(arr)));
         System.out.println(Arrays.toString(findDuplicatesUsingMap(arr)));
         System.out.println(Arrays.toString(findDuplicatesUsingSet(arr)));
+        System.out.println(Arrays.toString(findDuplicatesUsingStream(arr)));
+    }
+
+    private static int[] findDuplicatesUsingStream(int[] arr) {
+        return Arrays.stream(arr)
+                .boxed()
+                .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(n -> n.getValue() > 1)
+                .mapToInt(n -> n.getKey())
+                .toArray();
     }
 
     private static Integer[] findDuplicatesUsingSet(int[] arr) {
-		Set<Integer> ele=new HashSet<>();
-        Set<Integer> res= new HashSet<>();
+        Set<Integer> ele = new HashSet<>();
+        Set<Integer> res = new HashSet<>();
 
         for (Integer integer : arr) {
-            if(!ele.add(integer)){
+            if (!ele.add(integer)) {
                 res.add(integer);
             }
         }
 
         return res.toArray(new Integer[0]);
-	}
+    }
 
-	private static int[] findDuplicatesUsingMap(int[] arr) {
+    private static int[] findDuplicatesUsingMap(int[] arr) {
         Map<Integer, Integer> freq = new HashMap<>();
         int[] res = new int[arr.length];
         int j = 0;
@@ -50,7 +63,7 @@ public class FindDuplicateElements {
         int k = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = i+1; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] == arr[j]) {
                     res[k++] = arr[i];
                     break;
