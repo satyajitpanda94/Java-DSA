@@ -8,6 +8,19 @@ public class FindDuplicateElements {
         System.out.println(Arrays.toString(findDuplicatesUsingMap(arr)));
         System.out.println(Arrays.toString(findDuplicatesUsingSet(arr)));
         System.out.println(Arrays.toString(findDuplicatesUsingStream(arr)));
+        System.out.println(Arrays.toString(findDuplicatesUsingStream2(arr)));
+    }
+
+    private static int[] findDuplicatesUsingStream2(int[] arr) {
+        List<Integer> arrList = Arrays.stream(arr)
+                .boxed()
+                .collect(Collectors.toList());
+
+        return arrList.stream()
+                .filter(n -> arrList.indexOf(n) != arrList.lastIndexOf(n))
+                .distinct()
+                .mapToInt(n -> n)
+                .toArray();
     }
 
     private static int[] findDuplicatesUsingStream(int[] arr) {
