@@ -1,15 +1,27 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FindDuplicateElements {
     public static void main(String[] args) {
-        int[] arr = { 24, 12, 67, 23, 24, 58, 12, 94, 64, 67 };
+        int[] arr = { 24, 12, 67, 23, 24, 58, 12, 94, 64, 67, 24 };
         System.out.println(Arrays.toString(findDuplicates(arr)));
         System.out.println(Arrays.toString(findDuplicatesUsingMap(arr)));
+        System.out.println(Arrays.toString(findDuplicatesUsingSet(arr)));
     }
 
-    private static int[] findDuplicatesUsingMap(int[] arr) {
+    private static Integer[] findDuplicatesUsingSet(int[] arr) {
+		Set<Integer> ele=new HashSet<>();
+        Set<Integer> res= new HashSet<>();
+
+        for (Integer integer : arr) {
+            if(!ele.add(integer)){
+                res.add(integer);
+            }
+        }
+
+        return res.toArray(new Integer[0]);
+	}
+
+	private static int[] findDuplicatesUsingMap(int[] arr) {
         Map<Integer, Integer> freq = new HashMap<>();
         int[] res = new int[arr.length];
         int j = 0;
@@ -38,9 +50,10 @@ public class FindDuplicateElements {
         int k = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[i] == arr[j] && i != j) {
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
                     res[k++] = arr[i];
+                    break;
                 }
             }
         }
