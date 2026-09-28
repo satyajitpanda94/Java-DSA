@@ -6,6 +6,22 @@ public class FindFirstNonRepeatingElements {
         int[] arr = { 15, 74, 15, 23, 47, 59, 34 };
 
         System.err.println(findNonRepeating(arr));
+        System.err.println(findNonRepeatingByHashMap(arr));
+    }
+
+    private static int findNonRepeatingByHashMap(int[] arr) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int n : arr) {
+            freq.put(n, freq.getOrDefault(n, 0) + 1);
+        }
+
+        for (int i : arr) {
+            if (freq.get(i) == 1) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private static int findNonRepeating(int[] arr) {
