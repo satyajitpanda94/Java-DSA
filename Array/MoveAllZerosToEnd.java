@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.IntStream;
 
 public class MoveAllZerosToEnd {
@@ -9,6 +10,7 @@ public class MoveAllZerosToEnd {
         int[] arr4 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
         int[] arr5 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
         int[] arr6 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
+        int[] arr7 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
 
         System.err.println(Arrays.toString(moveAllZerosToEnd(arr)));
         System.err.println(Arrays.toString(moveAllZerosToEnd2(arr2)));
@@ -16,6 +18,15 @@ public class MoveAllZerosToEnd {
         System.err.println(Arrays.toString(moveAllZerosToEnd4(arr6)));
         System.err.println(Arrays.toString(moveAllZerosToEndUsingExtraArray(arr4)));
         System.err.println(Arrays.toString(moveAllZerosToEndUsingStreamApi(arr5)));
+        System.err.println(Arrays.toString(moveAllZerosToEndUsingStreamApi2(arr7)));
+    }
+
+    private static int[] moveAllZerosToEndUsingStreamApi2(int[] arr) {
+        return Arrays.stream(arr)
+                .boxed()
+                .sorted(Comparator.comparingInt(n -> n == 0 ? 1 : 0))
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     private static int[] moveAllZerosToEnd4(int[] arr) {
