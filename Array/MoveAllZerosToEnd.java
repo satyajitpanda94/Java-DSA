@@ -15,6 +15,13 @@ public class MoveAllZerosToEnd {
 
     private static int[] moveAllZerosToEndUsingExtraArray(int[] arr) {
         int[] res=new int[arr.length];
+        int j=0;
+
+        for (int i : arr) {
+            if(i!=0){
+                res[j++]=i;
+            }
+        }
 
         return res;
     }
