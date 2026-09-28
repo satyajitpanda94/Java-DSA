@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class MoveAllZerosToEnd {
     public static void main(String[] args) {
@@ -6,14 +7,23 @@ public class MoveAllZerosToEnd {
         int[] arr2 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
         int[] arr3 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
         int[] arr4 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
+        int[] arr5 = { 0, 24, 0, 84, 0, 34, 0, 89, 74, 12, 0, 47 };
 
         System.err.println(Arrays.toString(moveAllZerosToEnd(arr)));
         System.err.println(Arrays.toString(moveAllZerosToEnd2(arr2)));
         System.err.println(Arrays.toString(moveAllZerosToEnd3(arr3)));
         System.err.println(Arrays.toString(moveAllZerosToEndUsingExtraArray(arr4)));
+        System.err.println(Arrays.toString(moveAllZerosToEndUsingStreamApi(arr5)));
     }
 
-    private static int[] moveAllZerosToEndUsingExtraArray(int[] arr) {
+    private static int[] moveAllZerosToEndUsingStreamApi(int[] arr) {
+		return IntStream.concat(
+            Arrays.stream(arr).filter(n->n!=0), 
+            Arrays.stream(arr).filter(n->n==0)
+        ).toArray();
+	}
+
+	private static int[] moveAllZerosToEndUsingExtraArray(int[] arr) {
         int[] res=new int[arr.length];
         int j=0;
 
