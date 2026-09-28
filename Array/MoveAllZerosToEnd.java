@@ -19,34 +19,33 @@ public class MoveAllZerosToEnd {
     }
 
     private static int[] moveAllZerosToEnd4(int[] arr) {
-		int j=0;
+        int j = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i]!=0){
-                arr[j++]=arr[i];
+            if (arr[i] != 0) {
+                arr[j++] = arr[i];
             }
         }
-        while(j<arr.length){
-            arr[j++]=0;
+        while (j < arr.length) {
+            arr[j++] = 0;
         }
 
         return arr;
-	}
+    }
 
-	private static int[] moveAllZerosToEndUsingStreamApi(int[] arr) {
-		return IntStream.concat(
-            Arrays.stream(arr).filter(n->n!=0), 
-            Arrays.stream(arr).filter(n->n==0)
-        ).toArray();
-	}
+    private static int[] moveAllZerosToEndUsingStreamApi(int[] arr) {
+        return IntStream.concat(
+                Arrays.stream(arr).filter(n -> n != 0),
+                Arrays.stream(arr).filter(n -> n == 0)).toArray();
+    }
 
-	private static int[] moveAllZerosToEndUsingExtraArray(int[] arr) {
-        int[] res=new int[arr.length];
-        int j=0;
+    private static int[] moveAllZerosToEndUsingExtraArray(int[] arr) {
+        int[] res = new int[arr.length];
+        int j = 0;
 
         for (int i : arr) {
-            if(i!=0){
-                res[j++]=i;
+            if (i != 0) {
+                res[j++] = i;
             }
         }
 
