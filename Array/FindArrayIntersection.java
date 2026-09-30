@@ -7,7 +7,27 @@ public class FindArrayIntersection {
         int[] arr2 = { 3, 4, 5, 6, 7 };
 
         System.out.println(Arrays.toString(findIntersection(arr1, arr2)));
+        System.out.println(Arrays.toString(findIntersection2(arr1, arr2)));
         System.out.println(Arrays.toString(findIntersectionByStream(arr1, arr2)));
+    }
+
+    private static int[] findIntersection2(int[] arr1, int[] arr2) {
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> intersection = new HashSet<>();
+
+        for (int n : arr1) {
+            set1.add(n);
+        }
+
+        for (int n : arr2) {
+            if (set1.contains(n)) {
+                intersection.add(n);
+            }
+        }
+
+        return intersection.stream()
+                .mapToInt(Integer::valueOf)
+                .toArray();
     }
 
     private static int[] findIntersectionByStream(int[] arr1, int[] arr2) {
