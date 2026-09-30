@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FindArrayIntersection {
     public static void main(String[] args) {
@@ -6,6 +7,18 @@ public class FindArrayIntersection {
         int[] arr2 = { 3, 4, 5, 6, 7 };
 
         System.out.println(Arrays.toString(findIntersection(arr1, arr2)));
+        System.out.println(Arrays.toString(findIntersectionByStream(arr1, arr2)));
+    }
+
+    private static int[] findIntersectionByStream(int[] arr1, int[] arr2) {
+        Set<Integer> set1 = Arrays.stream(arr1)
+                .boxed()
+                .collect(Collectors.toSet());
+
+        return Arrays.stream(arr2)
+                .filter(set1::contains)
+                .distinct()
+                .toArray();
     }
 
     private static int[] findIntersection(int[] arr1, int[] arr2) {
