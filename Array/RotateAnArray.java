@@ -6,6 +6,24 @@ public class RotateAnArray {
 
         System.out.println(Arrays.toString(rotateTheArray(arr, 2)));
         System.out.println(Arrays.toString(rotateTheSameArray(arr, 2)));
+        System.out.println("Array : "+Arrays.toString(arr));
+        System.out.println(Arrays.toString(rotateTheSameArray2(arr, 2)));
+    }
+
+    private static int[] rotateTheSameArray2(int[] arr, int k) {
+        int arrlen=arr.length;
+
+        for (int i = 0; i < k; i++) {
+            int first=arr[0];
+
+            for (int j = 0; j < arrlen-1; j++) {
+                arr[j]=arr[j+1];
+            }
+
+            arr[arrlen-1]=first;
+        }
+
+        return arr;
     }
 
     private static int[] rotateTheSameArray(int[] arr, int n) {
