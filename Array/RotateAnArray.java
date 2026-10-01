@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class RotateAnArray {
     public static void main(String[] args) {
@@ -6,21 +7,30 @@ public class RotateAnArray {
 
         System.out.println(Arrays.toString(rotateTheArray(arr, 2)));
         System.out.println(Arrays.toString(rotateTheSameArray(arr, 2)));
-        System.out.println("Array : "+Arrays.toString(arr));
+        System.out.println("Array : " + Arrays.toString(arr));
         System.out.println(Arrays.toString(rotateTheSameArray2(arr, 2)));
+        System.out.println("Array : " + Arrays.toString(arr));
+        System.out.println(Arrays.toString(rotateArrayByStream(arr, 3)));
+    }
+
+    private static int[] rotateArrayByStream(int[] arr, int i) {
+        return IntStream.concat(
+                Arrays.stream(arr, i, arr.length),
+                Arrays.stream(arr, 0, i))
+                .toArray();
     }
 
     private static int[] rotateTheSameArray2(int[] arr, int k) {
-        int arrlen=arr.length;
+        int arrlen = arr.length;
 
         for (int i = 0; i < k; i++) {
-            int first=arr[0];
+            int first = arr[0];
 
-            for (int j = 0; j < arrlen-1; j++) {
-                arr[j]=arr[j+1];
+            for (int j = 0; j < arrlen - 1; j++) {
+                arr[j] = arr[j + 1];
             }
 
-            arr[arrlen-1]=first;
+            arr[arrlen - 1] = first;
         }
 
         return arr;
