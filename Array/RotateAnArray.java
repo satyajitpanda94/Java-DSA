@@ -15,9 +15,16 @@ public class RotateAnArray {
 
     private static int[] rotateArrayByStream(int[] arr, int i) {
         return IntStream.concat(
-                Arrays.stream(arr, i, arr.length),
-                Arrays.stream(arr, 0, i))
+                Arrays.stream(arr).skip(i),
+                Arrays.stream(arr).limit(i))
                 .toArray();
+
+        // Also done by below
+        
+        // return IntStream.concat(
+        //         Arrays.stream(arr, i, arr.length),
+        //         Arrays.stream(arr, 0, i))
+        //         .toArray();
     }
 
     private static int[] rotateTheSameArray2(int[] arr, int k) {
