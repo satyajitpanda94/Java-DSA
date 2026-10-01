@@ -16,6 +16,25 @@ public class ReverseArray {
 
         System.out.println("arr : " + Arrays.toString(arr3));
         System.out.println("rev : " + Arrays.toString(reversedArrayByStream(arr3)));
+
+        System.out.println("arr : " + Arrays.toString(arr3));
+        System.out.println("rev : " + Arrays.toString(reversedArrayByWhileLoop(arr3)));
+    }
+
+    private static int[] reversedArrayByWhileLoop(int[] arr) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+
+            start++;
+            end--;
+        }
+
+        return arr;
     }
 
     private static int[] reversedArrayByStream(int[] arr) {
