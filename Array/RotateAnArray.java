@@ -5,6 +5,26 @@ public class RotateAnArray {
         int[] arr = { 1, 2, 4, 6, 8, 9 };
 
         System.out.println(Arrays.toString(rotateTheArray(arr, 2)));
+        System.out.println(Arrays.toString(rotateTheSameArray(arr, 2)));
+    }
+
+    private static int[] rotateTheSameArray(int[] arr, int n) {
+        int l = arr.length;
+        reverseArr(arr, 0, n - 1);
+        reverseArr(arr, n, l - 1);
+        reverseArr(arr, 0, l - 1);
+        return arr;
+    }
+
+    private static void reverseArr(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+
+            start++;
+            end--;
+        }
     }
 
     private static int[] rotateTheArray(int[] arr, int n) {
