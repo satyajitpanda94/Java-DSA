@@ -1,17 +1,35 @@
 // Find all pairs with a given sum.
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.*;
 
 public class FindAllPairs {
     public static void main(String[] args) {
         int[] arr = { 2, 4, 6, 8, 3, 7, 9, 0 };
 
         System.out.println(Arrays.deepToString(findPairs(arr, 10)));
+        System.out.println(Arrays.deepToString(findPairsByHashmap(arr, 10)));
         findPairsByStream(arr, 10).stream()
                 .forEach(v -> System.out.println(Arrays.toString(v)));
+    }
+
+    private static int[][] findPairsByHashmap(int[] arr, int sum) {
+        int[][] res = new int[arr.length][];
+        int k = 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int otherEle = sum - arr[i];
+
+            if (map.containsKey(otherEle)) {
+                res[k++] = new int[] { otherEle, arr[i] };
+            }
+
+            map.put(arr[i], i);
+        }
+
+        return Arrays.copyOf(res, k);
     }
 
     private static List<int[]> findPairsByStream(int[] arr, int sum) {
@@ -27,8 +45,8 @@ public class FindAllPairs {
         int[][] res = new int[arr.length][];
         int k = 0;
 
-        for (int i = 0; i < res.length; i++) {
-            for (int j = i + 1; j < res.length; j++) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] + arr[j] == sum) {
                     res[k++] = new int[] { arr[i], arr[j] };
                     break;
