@@ -1,12 +1,24 @@
 // Two Sum — find two elements whose sum equals a target.
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class FindSumOfTwoElememnts {
     public static void main(String[] args) {
         int[] arr = { 2, 8, 14, 12, 6, 17 };
 
         System.out.println(Arrays.toString(findSumElements(arr, 16)));
+        System.out.println(Arrays.toString(findSumElementsByStream(arr, 16)));
+    }
+
+    private static int[] findSumElementsByStream(int[] arr, int target) {
+        return IntStream.range(0, arr.length)
+                .boxed()
+                .flatMap(i -> IntStream.range(i + 1, arr.length)
+                        .filter(j -> arr[i] + arr[j] == target)
+                        .mapToObj(j -> new int[] { i, j }))
+                .findFirst()
+                .orElse(new int[] { -1, -1 });
     }
 
     private static int[] findSumElements(int[] arr, int sum) {
